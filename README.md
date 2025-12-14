@@ -50,7 +50,7 @@ To verify this flexibility, try our method directly on the MNIST tutorials (rand
 
 ## TwinFlow
 
-### Visualizations
+### TwinFlow-Qwen-Image Visualization
 
 <div align="center">
   <img src="assets/demo.jpg" width="1000" />
@@ -59,11 +59,16 @@ To verify this flexibility, try our method directly on the MNIST tutorials (rand
   </p>
 </div>
 
+### Comparison with Qwen-Image and Qwem-Image-Lightning
+
 <div align="center">
-  <img src="assets/case1.jpg" width="500" />
-  <img src="assets/case2.jpg" width="500" />
+  <img src="assets/case1.jpg" width="1000" />
+</div>
+
+<div align="center">
+  <img src="assets/case2.jpg" width="1000" />
   <p style="margin-top: 16px; font-size: 14px; color: #666; font-weight: bold; max-width: 1000px;">
-    Top to bottom: same prompt but different noise (left to right). Shown are: Qwen-Image (50×2 NFE), TwinFlow-Qwen-Image (1-NFE), and Qwen-Image-Lightning-v2.0 (1-NFE). TwinFlow-Qwen-Image generates high-quality images at 1-NFE while preserving strong diversity.
+    Top to bottom: same prompt but different noise (left to right). Shown are: Qwen-Image (50×2 NFE), TwinFlow-Qwen-Image (1-NFE), and Qwen-Image-Lightning-v2.0 (1-NFE).<br>TwinFlow-Qwen-Image generates high-quality images at 1-NFE while preserving strong diversity.
   </p>
 </div>
 
@@ -88,7 +93,7 @@ Key Advantages:
 
 ### Tutorials
 
-In the `tutorials/mnist` directory, we provide training code for MNIST that closely follows the implementation described in the paper, intended for tutorial purposes. This tutorial includes the core implementations of $\mathcal{L}_\mathrm{base}$ and $\mathcal{L}_\mathrm{TwinFlow}$.
+In the `tutorials/mnist` directory, we provide training code for MNIST that closely follows the implementation described in the paper, intended for tutorial purposes. This tutorial includes the core implementations of $L_\mathrm{base}$ and $\mathcal{L}_\mathrm{TwinFlow}$ .
 
 To run TwinFlow training:
 
