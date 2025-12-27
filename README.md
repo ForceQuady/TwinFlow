@@ -11,34 +11,28 @@
 
 [![Project Page](https://img.shields.io/badge/Project%20Page-133399.svg?logo=homepage)](https://zhenglin-cheng.com/twinflow)&#160;
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Model-TwinFlow--Qwen--Image-yellow)](https://huggingface.co/inclusionAI/TwinFlow)&#160;
+![ModelScope](https://img.shields.io/badge/ModelScope-TwinFlow--Qwen--Image-%23624AFF?logo=data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjFlbSIgc3R5bGU9ImZsZXg6bm9uZTtsaW5lLWhlaWdodDoxIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxZW0iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPk1vZGVsU2NvcGU8L3RpdGxlPjxwYXRoIGQ9Ik0wIDcuOTY3aDIuNjY3djIuNjY3SDB6TTggMTAuNjMzaDIuNjY3VjEzLjNIOHoiIGZpbGw9IiMzNkNFRDAiPjwvcGF0aD48cGF0aCBkPSJNMCAxMC42MzNoMi42NjdWMTMuM0gwek0yLjY2NyAxMy4zaDIuNjY2djIuNjY3SDh2Mi42NjZIMi42NjdWMTMuM3pNMi42NjcgNS4zSDh2Mi42NjdINS4zMzN2Mi42NjZIMi42NjdWNS4zek0xMC42NjcgMTMuM2gyLjY2N3YyLjY2N2gtMi42Njd6IiBmaWxsPSIjNjI0QUZGIj48L3BhdGg+PHBhdGggZD0iTTI0IDcuOTY3aC0yLjY2N3YyLjY2N0gyNHpNMTYgMTAuNjMzaC0yLjY2N1YxMy4zSDE2eiIgZmlsbD0iIzM2Q0VEMCI+PC9wYXRoPjxwYXRoIGQ9Ik0yNCAxMC42MzNoLTIuNjY3VjEzLjNIMjR6TTIxLjMzMyAxMy4zaC0yLjY2NnYyLjY2N0gxNnYyLjY2Nmg1LjMzM1YxMy4zek0yMS4zMzMgNS4zSDE2djIuNjY3aDIuNjY3djIuNjY2aDIuNjY2VjUuM3oiIGZpbGw9IiM2MjRBRkYiPjwvcGF0aD48L3N2Zz4=)&#160;
 [![Github Repo](https://img.shields.io/badge/inclusionAI%2FTwinFlow-black?logo=github)](https://github.com/inclusionAI/TwinFlow)&#160;
 <a href="https://arxiv.org/abs/2512.05150" target="_blank"><img src="https://img.shields.io/badge/Paper-b5212f.svg?logo=arxiv" height="21px"></a>
+<a href="https://deepwiki.com/inclusionAI/TwinFlow"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>&#160;
 
 </div>
 
 ## 🧭 Table of Contents
 
+- [Codebase Usage 🔥](src/README.md)
 - [Inference Demo](#inference-demo)
-- [Tutorials on MNIST](#tutorials)
+- [Tutorials on MNIST](tutorials/README.md)
 
 ## 📰 News
 
+- We release training code and better TwinFlow implementation on SD3.5 and OpenUni under `src` directory 👏🏻.
 - We release tutorials on MNIST to provide core implementation of TwinFlow!
 - We release **TwinFlow-Qwen-Image-v1.0**! And we are also working on **Z-Image-Turbo to make it faster!**
 
 ## ⚙️ Key Features
 
-1. **Simple and Memory-Efficient Framework**
-   - **No JVPs:** Unlike sCM and MeanFlow, we require no JVP operations, making the method highly memory-friendly.
-   - **No GANs:** Unlike DMD2, We eliminate the need for adversarial loss, removing the complexity of training discriminators.
-   - **No Auxiliary Networks:** Unlike distribution matching methods like VSD/DMD, We require no fixed teacher models for distillation and no additional fake score networks for distribution matching.
-
-This feature is demonstrated by our successful full-parameter few-step training of the Qwen-Image-20B.
-
-2. **Flexible Initialization: "Start with Any Model"**
-   - **Further Distillation:** Thanks to the one-model design, our method can learn the score function starting from any stage, _enabling further distillation on already distilled models._
-
-To verify this flexibility, try our method directly on the MNIST tutorials (random initialization) and stay tuned for our faster Z-Image-Turbo (distilled model initialization).
+![](assets/twinflow_feats.png)
 
 ## 💪 Open-source Plans
 
@@ -97,28 +91,6 @@ Key Advantages:
 - **One-model Simplicity.** We eliminate the need for any auxiliary networks. The model learns to rectify its own flow field, acting as the generator, fake/real score. No extra GPU memory is wasted on frozen teachers or discriminators during training.
 - **Scalability on Large Models.** TwinFlow is **easy to scale on 20B full-parameter training** due to the one-model simplicity. In contrast, methods like VSD, SiD, and DMD/DMD2 require maintaining three separate models for distillation, which not only significantly increases memory consumption—often leading OOM, but also introduces substantial complexity when scaling to large-scale training regimes.
 
-### Tutorials
-
-In the `tutorials/mnist` directory, we provide training code for MNIST that closely follows the implementation described in the paper, intended for tutorial purposes. This tutorial includes the core implementations of $L_\mathrm{base}$ and $\mathcal{L}_\mathrm{TwinFlow}$ .
-
-To run TwinFlow training:
-
-```bash
-cd tutorials/mnist
-python main.py --using_twinflow --save_dir ./outputs/twinflow
-```
-
-To run training without $\mathcal{L}_\mathrm{TwinFlow}$:
-
-```bash
-cd tutorials/mnist
-python main.py --save_dir ./outputs/rcgm
-```
-
-| TwinFlow training on MNIST | RCGM (without TwinFlow) training on MNIST |
-|----------------------------|------------------------------------------|
-| ![](assets/mnist_twinflow.png) | ![](assets/mnist_rcgm.png) |
-
 
 ### Inference Demo
 
@@ -167,8 +139,29 @@ sampler_config = {
   journal={arXiv preprint arXiv:2512.05150},
   year={2025}
 }
+
+@misc{sun2025anystep,
+  author = {Sun, Peng and Lin, Tao},
+  note   = {GitHub repository},
+  title  = {Any-step Generation via N-th Order Recursive Consistent Velocity Field Estimation},
+  url    = {https://github.com/LINs-lab/RCGM},
+  year   = {2025}
+}
+
+@article{sun2025unified,
+  title = {Unified continuous generative models},
+  author = {Sun, Peng and Jiang, Yi and Lin, Tao},
+  journal = {arXiv preprint arXiv:2505.07447},
+  year = {2025},
+  url = {https://arxiv.org/abs/2505.07447},
+  archiveprefix = {arXiv},
+  eprint = {2505.07447},
+  primaryclass = {cs.LG}
+}
 ```
 
 ## 🤗 Acknowledgement
 
 TwinFlow is built upon [RCGM](https://github.com/LINs-lab/RCGM) and [UCGM](https://github.com/LINs-lab/UCGM), with much support from [InclusionAI](https://github.com/inclusionAI).
+
+Note: The [LINs Lab](https://lins-lab.github.io/) has openings for PhD students for the Fall 2026/2027 intake. Interested candidates are encouraged to reach out.
