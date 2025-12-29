@@ -58,7 +58,7 @@
 <summary>👀 Original Z-Image-Turbo 2-NFE</summary>
 
 <div align="center">
-  <img src="assets/twinflow_z_2step.jpg" width="1000" />
+  <img src="assets/z_turbo_2step.jpg" width="1000" />
   <p style="margin-top: 8px; font-size: 14px; color: #666; font-weight: bold;">
     2-NFE visualization of Z-Image-Turbo
   </p>
